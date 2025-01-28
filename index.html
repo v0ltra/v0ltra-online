@@ -6,6 +6,188 @@
     <title>V0ltra Online</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        /* Genel Stil ve Arkaplan */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #0d47a1); /* Mor ve Mavi gradyan arkaplan */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Logo ve Başlık */
+        #logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #logo {
+            width: 50px; /* Logo boyutu */
+            height: 50px;
+        }
+
+        #logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffeb3b, #9c27b0); /* Sarı ve Mor gradyan */
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Başlık ve alt başlık */
+        #welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #main-title {
+            font-size: 3rem;
+            font-weight: bold;
+            animation: slideIn 1.5s forwards;
+        }
+
+        #sub-title {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #f0f0f0;
+            animation: slideInText 2s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInText {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Menü Butonları */
+        #menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Kataloglar Menü */
+        #catalog-button-container {
+            position: relative;
+        }
+
+        #catalog-button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #catalogs-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #6a1b9a, #0d47a1); /* Mor ve mavi gradyan */
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: dropdownAnimation 0.5s forwards;
+        }
+
+        #catalogs-dropdown a {
+            padding: 12px 25px;
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #catalogs-dropdown a:hover {
+            background-color: #333;
+        }
+
+        /* Kataloglar menüsünün animasyonu */
+        @keyframes dropdownAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Menü üzerine mouse geldiğinde dropdown menüyü göster */
+        #catalog-button-container:hover #catalogs-dropdown {
+            display: block;
+        }
+
+        /* Dot animasyonu için stil */
+        .dot-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        .dot {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: move linear forwards;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(100vw);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Logo ve Başlık -->
@@ -40,6 +222,35 @@
         <button id="about-button">Hakkımda</button>
         <button id="articles-button">Makaleler</button>
     </div>
+
+    <script>
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            
+            // Rastgele özellikler
+            const size = Math.random() * 4 + 2; // 2px - 6px
+            const top = Math.random() * 100; // 0% - 100%
+            const duration = Math.random() * 5 + 3; // 3s - 8s
+            const opacity = Math.random() * 0.5 + 0.3; // 0.3 - 0.8
+
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.top = `${top}%`;
+            dot.style.opacity = opacity;
+            dot.style.animationDuration = `${duration}s`;
+
+            document.getElementById('container').appendChild(dot);
+
+            // Animasyon bitince elementi sil
+            dot.addEventListener('animationend', () => {
+                dot.remove();
+            });
+        }
+
+        // Rastgele aralıklarla yeni nokta oluştur
+        setInterval(createDot, Math.random() * 150 + 50); // 50ms - 200ms
+    </script>
 
     <script src="script.js"></script>
 </body>
