@@ -5,80 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V0ltra Online</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <style>
-        /* styles.css'e eklemeniz gereken animasyon stilleri */
-        .dot-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .dot {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: move linear forwards;
-        }
-
-        @keyframes move {
-            from {
-                transform: translateX(100vw);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
-
-        /* Mevcut içeriği öne çıkarmak için */
-        body > *:not(.dot-container) {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
 </head>
 <body>
-    <!-- Animasyon konteyneri -->
-    <div class="dot-container" id="dot-container"></div>
-
     <!-- Logo ve Başlık -->
     <div id="logo-container">
         <img src="logo.png" alt="Logo" id="logo">
         <h1 id="logo-text">V0ltra Online</h1>
     </div>
 
-    <!-- Diğer elementler aynı kalacak... -->
+    <!-- Başlık ve alt başlık -->
+    <div id="welcome-message">
+        <h1 id="main-title">V0ltra Online'a Hoşgeldiniz.</h1>
+        <p id="sub-title">Web sitemde gelişme serüvenime, projelerime ve medyalara dair bilgi ve erişim bulacaksınız.</p>
+    </div>
+
+    <!-- Menü Butonları -->
+    <div id="menu">
+        <button id="addoninfo-button">Ek Bilgiler</button>
+        
+        <!-- Kataloglar Butonu -->
+        <div id="catalog-button-container">
+            <button id="catalog-button">Kataloglar</button>
+            <div id="catalogs-dropdown">
+                <a href="elektrik-elektronik/katalog_elektrik-elektronik.html">Elektrik-Elektronik</a>
+                <a href="kodlar/katalog_kodlar.html">Kodlar</a>
+                <a href="youtube/katalog_youtube.html">Youtube</a>
+                <a href="etkinlikler/katalog_etkinlikler.html">Etkinlikler</a>
+                <a href="teknik-detaylar/katalog_teknik-detaylar.html">Teknik Detaylar</a>
+            </div>
+        </div>
+
+        <button id="announcements-button">Duyurular</button>
+        <button id="about-button">Hakkımda</button>
+        <button id="articles-button">Makaleler</button>
+    </div>
 
     <script src="script.js"></script>
-    <script>
-        // script.js'e eklemeniz gereken animasyon kodu
-        function createDot() {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            
-            const size = Math.random() * 4 + 2;
-            const top = Math.random() * 100;
-            const duration = Math.random() * 5 + 3;
-            const opacity = Math.random() * 0.5 + 0.2;
-
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-            dot.style.top = `${top}%`;
-            dot.style.opacity = opacity;
-            dot.style.animationDuration = `${duration}s`;
-
-            document.getElementById('dot-container').appendChild(dot);
-
-            dot.addEventListener('animationend', () => {
-                dot.remove();
-            });
-        }
-
-        setInterval(createDot, Math.random() * 150 + 50);
-    </script>
 </body>
 </html>
